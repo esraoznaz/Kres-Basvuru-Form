@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f0f40825f1e74fc9a10457b87a2ce413" Name="Diagram1">
+        <EntityTypeShape EntityType="Kres_BasvuruModel.Anne_Bilgisi" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kres_BasvuruModel.Baba_Bilgisi" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kres_BasvuruModel.Bakanin_Bilgisi" Width="1.5" PointX="1" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kres_BasvuruModel.Basvuranin_Bilgisi" Width="1.5" PointX="5.375" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kres_BasvuruModel.Cocuk_Bilgisi" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kres_BasvuruModel.Cocuk_Harici_Bilgi" Width="1.5" PointX="3.375" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kres_BasvuruModel.sysdiagram" Width="1.5" PointX="10.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="Kres_BasvuruModel.FK_Anne_Bilgisi_Cocuk_Bilgisi" ManuallyRouted="false" />
+        <AssociationConnector Association="Kres_BasvuruModel.FK_Baba_Bilgisi_Cocuk_Bilgisi" ManuallyRouted="false" />
+        <AssociationConnector Association="Kres_BasvuruModel.FK_Bakanin_Bilgisi_Cocuk_Bilgisi" ManuallyRouted="false" />
+        <AssociationConnector Association="Kres_BasvuruModel.FK_Basvuranin_Bilgisi_Cocuk_Bilgisi" ManuallyRouted="false" />
+        <AssociationConnector Association="Kres_BasvuruModel.FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Kres_BasvuruModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anne_Bilgisi">
+          <Key>
+            <PropertyRef Name="Anne_Id" />
+          </Key>
+          <Property Name="Anne_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cocuk_Id" Type="int" />
+          <Property Name="Anne_Adi_Soyadi" Type="varchar" MaxLength="100" />
+          <Property Name="Anne_TC_No" Type="varchar" MaxLength="11" />
+          <Property Name="Anne_Meslegi" Type="varchar" MaxLength="50" />
+          <Property Name="Anne_Meslek_Tipi" Type="varchar" MaxLength="50" />
+          <Property Name="Anne_Acik_Is_Adresi" Type="varchar" MaxLength="255" />
+          <Property Name="Anne_Calisma_Saatleri" Type="varchar" MaxLength="50" />
+          <Property Name="Anne_Cep_Telefonu" Type="varchar" MaxLength="15" />
+          <Property Name="Anneye_Ulasilamadiginda_Irtibat_No" Type="varchar" MaxLength="15" />
+          <Property Name="Anne_Durumu" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Baba_Bilgisi">
+          <Key>
+            <PropertyRef Name="Baba_Id" />
+          </Key>
+          <Property Name="Baba_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cocuk_Id" Type="int" />
+          <Property Name="Baba_Adi_Soyadi" Type="varchar" MaxLength="100" />
+          <Property Name="Baba_TC_No" Type="varchar" MaxLength="11" />
+          <Property Name="Baba_Meslegi" Type="varchar" MaxLength="50" />
+          <Property Name="Baba_Meslek_Tipi" Type="varchar" MaxLength="50" />
+          <Property Name="Baba_Acik_Is_Adresi" Type="varchar" MaxLength="255" />
+          <Property Name="Baba_Calisma_Saatleri" Type="varchar" MaxLength="50" />
+          <Property Name="Baba_Cep_Telefonu" Type="varchar" MaxLength="15" />
+          <Property Name="Babaya_Ulasilamadiginda_Irtibat_No" Type="varchar" MaxLength="15" />
+          <Property Name="Baba_Durumu" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bakanin_Bilgisi">
+          <Key>
+            <PropertyRef Name="Bakan_Id" />
+          </Key>
+          <Property Name="Bakan_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cocuk_Id" Type="int" />
+          <Property Name="Emekli_Personel_Torun" Type="varchar" MaxLength="100" />
+          <Property Name="Bakan_TC_No" Type="varchar" MaxLength="11" />
+          <Property Name="Bakan_Telefon_Numarasi" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Basvuranin_Bilgisi">
+          <Key>
+            <PropertyRef Name="Basvuran_Id" />
+          </Key>
+          <Property Name="Basvuran_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cocuk_Id" Type="int" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Cocuk_Bilgisi">
+          <Key>
+            <PropertyRef Name="Cocuk_Id" />
+          </Key>
+          <Property Name="Cocuk_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cocuk_Adi_Soyadi" Type="varchar" MaxLength="100" />
+          <Property Name="Cocuk_TC_No" Type="varchar" MaxLength="11" />
+          <Property Name="Dogum_Tarihi" Type="date" />
+          <Property Name="Cocuk_Cinsiyeti" Type="varchar" MaxLength="10" />
+          <Property Name="Ev_Adresi" Type="varchar(max)" />
+          <Property Name="Basvuru_Yapilan_Kres_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Cocuk_Harici_Bilgi">
+          <Key>
+            <PropertyRef Name="Harici_Bilgi_Id" />
+          </Key>
+          <Property Name="Harici_Bilgi_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cocuk_Id" Type="int" />
+          <Property Name="Cocuk_Kronik_Hastalik" Type="varchar" MaxLength="255" />
+          <Property Name="Cocuk_Alerji" Type="varchar" MaxLength="255" />
+          <Property Name="Cocuk_Davranis_Problemi" Type="varchar(max)" />
+          <Property Name="Cocuk_Ozel_Durum" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Anne_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Anne_Bilgisi" Type="Self.Anne_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Anne_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Baba_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Baba_Bilgisi" Type="Self.Baba_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Baba_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bakanin_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Bakanin_Bilgisi" Type="Self.Bakanin_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Bakanin_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvuranin_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Basvuranin_Bilgisi" Type="Self.Basvuranin_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Basvuranin_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Cocuk_Harici_Bilgi" Type="Self.Cocuk_Harici_Bilgi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Cocuk_Harici_Bilgi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Kres_BasvuruModelStoreContainer">
+          <EntitySet Name="Anne_Bilgisi" EntityType="Self.Anne_Bilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Baba_Bilgisi" EntityType="Self.Baba_Bilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bakanin_Bilgisi" EntityType="Self.Bakanin_Bilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Basvuranin_Bilgisi" EntityType="Self.Basvuranin_Bilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cocuk_Bilgisi" EntityType="Self.Cocuk_Bilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cocuk_Harici_Bilgi" EntityType="Self.Cocuk_Harici_Bilgi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Anne_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Anne_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Anne_Bilgisi" EntitySet="Anne_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Baba_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Baba_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Baba_Bilgisi" EntitySet="Baba_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bakanin_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Bakanin_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Bakanin_Bilgisi" EntitySet="Bakanin_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvuranin_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Basvuranin_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Basvuranin_Bilgisi" EntitySet="Basvuranin_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi" Association="Self.FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Cocuk_Harici_Bilgi" EntitySet="Cocuk_Harici_Bilgi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Kres_BasvuruModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Anne_Bilgisi">
+          <Key>
+            <PropertyRef Name="Anne_Id" />
+          </Key>
+          <Property Name="Anne_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cocuk_Id" Type="Int32" />
+          <Property Name="Anne_Adi_Soyadi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_TC_No" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_Meslegi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_Meslek_Tipi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_Acik_Is_Adresi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_Calisma_Saatleri" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_Cep_Telefonu" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Anneye_Ulasilamadiginda_Irtibat_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Anne_Durumu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cocuk_Bilgisi" Relationship="Self.FK_Anne_Bilgisi_Cocuk_Bilgisi" FromRole="Anne_Bilgisi" ToRole="Cocuk_Bilgisi" />
+        </EntityType>
+        <EntityType Name="Baba_Bilgisi">
+          <Key>
+            <PropertyRef Name="Baba_Id" />
+          </Key>
+          <Property Name="Baba_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cocuk_Id" Type="Int32" />
+          <Property Name="Baba_Adi_Soyadi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_TC_No" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_Meslegi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_Meslek_Tipi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_Acik_Is_Adresi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_Calisma_Saatleri" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_Cep_Telefonu" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Babaya_Ulasilamadiginda_Irtibat_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Baba_Durumu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cocuk_Bilgisi" Relationship="Self.FK_Baba_Bilgisi_Cocuk_Bilgisi" FromRole="Baba_Bilgisi" ToRole="Cocuk_Bilgisi" />
+        </EntityType>
+        <EntityType Name="Bakanin_Bilgisi">
+          <Key>
+            <PropertyRef Name="Bakan_Id" />
+          </Key>
+          <Property Name="Bakan_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cocuk_Id" Type="Int32" />
+          <Property Name="Emekli_Personel_Torun" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Bakan_TC_No" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Bakan_Telefon_Numarasi" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cocuk_Bilgisi" Relationship="Self.FK_Bakanin_Bilgisi_Cocuk_Bilgisi" FromRole="Bakanin_Bilgisi" ToRole="Cocuk_Bilgisi" />
+        </EntityType>
+        <EntityType Name="Basvuranin_Bilgisi">
+          <Key>
+            <PropertyRef Name="Basvuran_Id" />
+          </Key>
+          <Property Name="Basvuran_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cocuk_Id" Type="Int32" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cocuk_Bilgisi" Relationship="Self.FK_Basvuranin_Bilgisi_Cocuk_Bilgisi" FromRole="Basvuranin_Bilgisi" ToRole="Cocuk_Bilgisi" />
+        </EntityType>
+        <EntityType Name="Cocuk_Bilgisi">
+          <Key>
+            <PropertyRef Name="Cocuk_Id" />
+          </Key>
+          <Property Name="Cocuk_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cocuk_Adi_Soyadi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cocuk_TC_No" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Dogum_Tarihi" Type="DateTime" Precision="0" />
+          <Property Name="Cocuk_Cinsiyeti" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ev_Adresi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Basvuru_Yapilan_Kres_Id" Type="Int32" />
+          <NavigationProperty Name="Anne_Bilgisi" Relationship="Self.FK_Anne_Bilgisi_Cocuk_Bilgisi" FromRole="Cocuk_Bilgisi" ToRole="Anne_Bilgisi" />
+          <NavigationProperty Name="Baba_Bilgisi" Relationship="Self.FK_Baba_Bilgisi_Cocuk_Bilgisi" FromRole="Cocuk_Bilgisi" ToRole="Baba_Bilgisi" />
+          <NavigationProperty Name="Bakanin_Bilgisi" Relationship="Self.FK_Bakanin_Bilgisi_Cocuk_Bilgisi" FromRole="Cocuk_Bilgisi" ToRole="Bakanin_Bilgisi" />
+          <NavigationProperty Name="Basvuranin_Bilgisi" Relationship="Self.FK_Basvuranin_Bilgisi_Cocuk_Bilgisi" FromRole="Cocuk_Bilgisi" ToRole="Basvuranin_Bilgisi" />
+          <NavigationProperty Name="Cocuk_Harici_Bilgi" Relationship="Self.FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi" FromRole="Cocuk_Bilgisi" ToRole="Cocuk_Harici_Bilgi" />
+        </EntityType>
+        <EntityType Name="Cocuk_Harici_Bilgi">
+          <Key>
+            <PropertyRef Name="Harici_Bilgi_Id" />
+          </Key>
+          <Property Name="Harici_Bilgi_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cocuk_Id" Type="Int32" />
+          <Property Name="Cocuk_Kronik_Hastalik" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cocuk_Alerji" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cocuk_Davranis_Problemi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cocuk_Ozel_Durum" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cocuk_Bilgisi" Relationship="Self.FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi" FromRole="Cocuk_Harici_Bilgi" ToRole="Cocuk_Bilgisi" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Anne_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Anne_Bilgisi" Type="Self.Anne_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Anne_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Baba_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Baba_Bilgisi" Type="Self.Baba_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Baba_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bakanin_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Bakanin_Bilgisi" Type="Self.Bakanin_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Bakanin_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvuranin_Bilgisi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Basvuranin_Bilgisi" Type="Self.Basvuranin_Bilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Basvuranin_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi">
+          <End Role="Cocuk_Bilgisi" Type="Self.Cocuk_Bilgisi" Multiplicity="0..1" />
+          <End Role="Cocuk_Harici_Bilgi" Type="Self.Cocuk_Harici_Bilgi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cocuk_Bilgisi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Principal>
+            <Dependent Role="Cocuk_Harici_Bilgi">
+              <PropertyRef Name="Cocuk_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Kres_BasvuruEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anne_Bilgisi" EntityType="Self.Anne_Bilgisi" />
+          <EntitySet Name="Baba_Bilgisi" EntityType="Self.Baba_Bilgisi" />
+          <EntitySet Name="Bakanin_Bilgisi" EntityType="Self.Bakanin_Bilgisi" />
+          <EntitySet Name="Basvuranin_Bilgisi" EntityType="Self.Basvuranin_Bilgisi" />
+          <EntitySet Name="Cocuk_Bilgisi" EntityType="Self.Cocuk_Bilgisi" />
+          <EntitySet Name="Cocuk_Harici_Bilgi" EntityType="Self.Cocuk_Harici_Bilgi" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Anne_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Anne_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Anne_Bilgisi" EntitySet="Anne_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Baba_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Baba_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Baba_Bilgisi" EntitySet="Baba_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bakanin_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Bakanin_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Bakanin_Bilgisi" EntitySet="Bakanin_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvuranin_Bilgisi_Cocuk_Bilgisi" Association="Self.FK_Basvuranin_Bilgisi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Basvuranin_Bilgisi" EntitySet="Basvuranin_Bilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi" Association="Self.FK_Cocuk_Harici_Bilgi_Cocuk_Bilgisi">
+            <End Role="Cocuk_Bilgisi" EntitySet="Cocuk_Bilgisi" />
+            <End Role="Cocuk_Harici_Bilgi" EntitySet="Cocuk_Harici_Bilgi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Kres_BasvuruModelStoreContainer" CdmEntityContainer="Kres_BasvuruEntities4">
+          <EntitySetMapping Name="Anne_Bilgisi">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.Anne_Bilgisi">
+              <MappingFragment StoreEntitySet="Anne_Bilgisi">
+                <ScalarProperty Name="Anne_Id" ColumnName="Anne_Id" />
+                <ScalarProperty Name="Cocuk_Id" ColumnName="Cocuk_Id" />
+                <ScalarProperty Name="Anne_Adi_Soyadi" ColumnName="Anne_Adi_Soyadi" />
+                <ScalarProperty Name="Anne_TC_No" ColumnName="Anne_TC_No" />
+                <ScalarProperty Name="Anne_Meslegi" ColumnName="Anne_Meslegi" />
+                <ScalarProperty Name="Anne_Meslek_Tipi" ColumnName="Anne_Meslek_Tipi" />
+                <ScalarProperty Name="Anne_Acik_Is_Adresi" ColumnName="Anne_Acik_Is_Adresi" />
+                <ScalarProperty Name="Anne_Calisma_Saatleri" ColumnName="Anne_Calisma_Saatleri" />
+                <ScalarProperty Name="Anne_Cep_Telefonu" ColumnName="Anne_Cep_Telefonu" />
+                <ScalarProperty Name="Anneye_Ulasilamadiginda_Irtibat_No" ColumnName="Anneye_Ulasilamadiginda_Irtibat_No" />
+                <ScalarProperty Name="Anne_Durumu" ColumnName="Anne_Durumu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Baba_Bilgisi">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.Baba_Bilgisi">
+              <MappingFragment StoreEntitySet="Baba_Bilgisi">
+                <ScalarProperty Name="Baba_Id" ColumnName="Baba_Id" />
+                <ScalarProperty Name="Cocuk_Id" ColumnName="Cocuk_Id" />
+                <ScalarProperty Name="Baba_Adi_Soyadi" ColumnName="Baba_Adi_Soyadi" />
+                <ScalarProperty Name="Baba_TC_No" ColumnName="Baba_TC_No" />
+                <ScalarProperty Name="Baba_Meslegi" ColumnName="Baba_Meslegi" />
+                <ScalarProperty Name="Baba_Meslek_Tipi" ColumnName="Baba_Meslek_Tipi" />
+                <ScalarProperty Name="Baba_Acik_Is_Adresi" ColumnName="Baba_Acik_Is_Adresi" />
+                <ScalarProperty Name="Baba_Calisma_Saatleri" ColumnName="Baba_Calisma_Saatleri" />
+                <ScalarProperty Name="Baba_Cep_Telefonu" ColumnName="Baba_Cep_Telefonu" />
+                <ScalarProperty Name="Babaya_Ulasilamadiginda_Irtibat_No" ColumnName="Babaya_Ulasilamadiginda_Irtibat_No" />
+                <ScalarProperty Name="Baba_Durumu" ColumnName="Baba_Durumu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bakanin_Bilgisi">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.Bakanin_Bilgisi">
+              <MappingFragment StoreEntitySet="Bakanin_Bilgisi">
+                <ScalarProperty Name="Bakan_Id" ColumnName="Bakan_Id" />
+                <ScalarProperty Name="Cocuk_Id" ColumnName="Cocuk_Id" />
+                <ScalarProperty Name="Emekli_Personel_Torun" ColumnName="Emekli_Personel_Torun" />
+                <ScalarProperty Name="Bakan_TC_No" ColumnName="Bakan_TC_No" />
+                <ScalarProperty Name="Bakan_Telefon_Numarasi" ColumnName="Bakan_Telefon_Numarasi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Basvuranin_Bilgisi">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.Basvuranin_Bilgisi">
+              <MappingFragment StoreEntitySet="Basvuranin_Bilgisi">
+                <ScalarProperty Name="Basvuran_Id" ColumnName="Basvuran_Id" />
+                <ScalarProperty Name="Cocuk_Id" ColumnName="Cocuk_Id" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cocuk_Bilgisi">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.Cocuk_Bilgisi">
+              <MappingFragment StoreEntitySet="Cocuk_Bilgisi">
+                <ScalarProperty Name="Cocuk_Id" ColumnName="Cocuk_Id" />
+                <ScalarProperty Name="Cocuk_Adi_Soyadi" ColumnName="Cocuk_Adi_Soyadi" />
+                <ScalarProperty Name="Cocuk_TC_No" ColumnName="Cocuk_TC_No" />
+                <ScalarProperty Name="Dogum_Tarihi" ColumnName="Dogum_Tarihi" />
+                <ScalarProperty Name="Cocuk_Cinsiyeti" ColumnName="Cocuk_Cinsiyeti" />
+                <ScalarProperty Name="Ev_Adresi" ColumnName="Ev_Adresi" />
+                <ScalarProperty Name="Basvuru_Yapilan_Kres_Id" ColumnName="Basvuru_Yapilan_Kres_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cocuk_Harici_Bilgi">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.Cocuk_Harici_Bilgi">
+              <MappingFragment StoreEntitySet="Cocuk_Harici_Bilgi">
+                <ScalarProperty Name="Harici_Bilgi_Id" ColumnName="Harici_Bilgi_Id" />
+                <ScalarProperty Name="Cocuk_Id" ColumnName="Cocuk_Id" />
+                <ScalarProperty Name="Cocuk_Kronik_Hastalik" ColumnName="Cocuk_Kronik_Hastalik" />
+                <ScalarProperty Name="Cocuk_Alerji" ColumnName="Cocuk_Alerji" />
+                <ScalarProperty Name="Cocuk_Davranis_Problemi" ColumnName="Cocuk_Davranis_Problemi" />
+                <ScalarProperty Name="Cocuk_Ozel_Durum" ColumnName="Cocuk_Ozel_Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Kres_BasvuruModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
